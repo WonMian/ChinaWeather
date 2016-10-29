@@ -26,15 +26,18 @@ def getCity(city):
     return None
 
 
-def getWeather():
-    choice = raw_input("查哪儿:\n")
+def getWeather(choice):
     code = getCity(choice)
+    print code
     if code:
         url = 'http://www.weather.com.cn/data/cityinfo/%s.html'%str(code)
         content = s.get(url,headers=headers).content
         data = json.loads(content.decode())
         result = data['weatherinfo']
         str_temp = '%s %s %s ~ %s' % (result['city'],result['weather'],result['temp1'],result['temp2'])
+        print str_temp
         return str_temp
     else:
         return '输入错误'
+
+getWeather('上海')
